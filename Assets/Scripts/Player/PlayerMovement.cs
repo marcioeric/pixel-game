@@ -20,7 +20,10 @@ namespace Player
         
         private float _horizontalMove = 0f;
         private bool _jump;
+        private bool _justJumped;
         
+        private static readonly int HorizontalSpeed = Animator.StringToHash("HorizontalSpeed");
+
         private void Update()
         {
             _horizontalMove = Input.GetAxis("Horizontal") * runSpeed;
@@ -28,15 +31,25 @@ namespace Player
             //RunSpeed é multiplicado para definir a velocidade do personagem
             
             //Dessa forma passando a velocidade para o animador, ele poderá animar corretamente o sprite
-            animator.SetFloat("Speed", Mathf.Abs(_horizontalMove));
-            animator.SetFloat("VerticalSpeed", rigidBody.velocity.y);
+            animator.SetFloat(HorizontalSpeed, Mathf.Abs(_horizontalMove));
                
             //Verifica se o botão de pular foi acionado
             if (Input.GetButtonDown("Jump"))
             {
                 _jump = true; //Seta a vatiavel de pular para true
+                _justJumped = true;
                 animator.SetBool("IsJumping", true);
             }
+        }
+
+        public void OnLanding()
+        {
+            if (!_justJumped)
+            {
+                Debug.Log("Chão");
+                animator.SetBool("IsJumping", false);
+            }
+            _justJumped = false;
         }
 
         //Método especifico para tratar física, pois é chamado de forma ordenada

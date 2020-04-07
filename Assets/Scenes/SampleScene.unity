@@ -130,7 +130,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 49223188}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1610,7 +1610,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 280043884}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: CeilingCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1775,8 +1775,9 @@ GameObject:
   - component: {fileID: 1137008268}
   - component: {fileID: 1137008272}
   - component: {fileID: 1137008273}
+  - component: {fileID: 1137008276}
   - component: {fileID: 1137008275}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1987,6 +1988,36 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1137008276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1137008267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bbf5797e57e83f428f1f76746560473, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpForce: 400
+  crouchSpeed: 0.36
+  movementSmoothing: 0.05
+  airControl: 0
+  whatIsGround:
+    m_Bits: 512
+  groundCheck: {fileID: 49223188}
+  ceilingCheck: {fileID: 280043884}
+  animator: {fileID: 1137008275}
+  runSpeed: 40
+  crouchDisableCollider: {fileID: 0}
+  _grounded: 0
+  _rigidBody2D: {fileID: 0}
+  _wasCrouching: 0
+  _facingRight: 1
+  _velocity: {x: 0, y: 0, z: 0}
+  _horizontalMove: 0
+  _jump: 0
 --- !u!1 &1773156879
 GameObject:
   m_ObjectHideFlags: 0
@@ -2004,7 +2035,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1773156880
 Transform:
   m_ObjectHideFlags: 0
