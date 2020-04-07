@@ -23,6 +23,8 @@ namespace Player
         private bool _justJumped;
         
         private static readonly int HorizontalSpeed = Animator.StringToHash("HorizontalSpeed");
+        private static readonly int IsJumping = Animator.StringToHash("IsJumping");
+        private static readonly int VerticalDirection = Animator.StringToHash("VerticalDirection");
 
         private void Update()
         {
@@ -32,14 +34,22 @@ namespace Player
             
             //Dessa forma passando a velocidade para o animador, ele poderá animar corretamente o sprite
             animator.SetFloat(HorizontalSpeed, Mathf.Abs(_horizontalMove));
+            animator.SetInteger(VerticalDirection, VerticalSpeed(rigidBody.velocity.y));
                
             //Verifica se o botão de pular foi acionado
-            if (Input.GetButtonDown("Jump"))
-            {
-                _jump = true; //Seta a vatiavel de pular para true
-                _justJumped = true;
-                animator.SetBool("IsJumping", true);
-            }
+            if (!Input.GetButtonDown("Jump")) return;
+            _jump = true; //Seta a vatiavel de pular para true
+            _justJumped = true;
+            animator.SetBool(IsJumping, true);
+        }
+
+        private int VerticalSpeed(float y)
+        {
+            if (y > 0)
+                return 1;
+            if (y < 0)
+                return -1;
+            return 0;
         }
 
         public void OnLanding()
@@ -47,7 +57,7 @@ namespace Player
             if (!_justJumped)
             {
                 Debug.Log("Chão");
-                animator.SetBool("IsJumping", false);
+                animator.SetBool(IsJumping, false);
             }
             _justJumped = false;
         }
